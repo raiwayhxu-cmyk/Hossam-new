@@ -1,0 +1,80 @@
+<!DOCTYPE html><html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة التحكم - Hossam Samsung</title>
+<style>
+body{font-family:Cairo;background:#0b0b0b;color:#fff;margin:0;padding:20px}
+.container{max-width:900px;margin:auto}
+.card{background:#151515;padding:20px;border-radius:16px;margin-bottom:20px;border:1px solid #222}
+input{width:100%;padding:12px;margin:8px 0;border-radius:10px;border:1px solid #333;background:#111;color:#fff}
+button{padding:12px 18px;border:0;border-radius:10px;cursor:pointer;font-weight:bold}
+.btn{background:#00b7ff;color:#000}
+.btn-danger{background:#ff3b3b;color:#fff}
+.product{display:flex;justify-content:space-between;align-items:center;background:#111;padding:10px;border-radius:10px;margin-top:10px}
+img{width:60px;height:60px;object-fit:cover;border-radius:10px}
+</style>
+</head>
+<body><div class="container"><h2>➕ إضافة منتج</h2>
+<div class="card">
+  <input id="name" placeholder="اسم المنتج">
+  <input id="price" placeholder="السعر">
+  <input id="image" placeholder="رابط الصورة">
+  <input id="spec" placeholder="المواصفات">
+  <button class="btn" onclick="addProduct()">إضافة</button>
+</div><h2>📦 المنتجات</h2>
+<div class="card" id="products"></div></div><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script><script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script><script>
+const firebaseConfig = {
+  apiKey: "AIzaSyA5wCXebT-XgfVzl_SWvSB-EBkBTLdmCco",
+  authDomain: "hossam-samsung.firebaseapp.com",
+  projectId: "hossam-samsung",
+  storageBucket: "hossam-samsung.firebasestorage.app",
+  messagingSenderId: "933073936684",
+  appId: "1:933073936684:web:43f85601885fdf91ef4c89",
+  measurementId: "G-HSTTH5NGJK"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// ➕ Add product
+function addProduct(){
+  db.collection("products").add({
+    name: name.value,
+    price: price.value,
+    image: image.value,
+    spec: spec.value
+  });
+  alert("تمت الإضافة");
+}
+
+// 📦 Load products
+function loadProducts(){
+  db.collection("products").onSnapshot(snap=>{
+    let box = document.getElementById('products');
+    box.innerHTML = "";
+
+    snap.forEach(doc=>{
+      let p = doc.data();
+
+      box.innerHTML += `
+        <div class="product">
+          <img src="${p.image}">
+          <div>
+            <b>${p.name}</b><br>
+            ${p.price} جنيه
+          </div>
+          <button class="btn-danger" onclick="deleteProduct('${doc.id}')">حذف</button>
+        </div>
+      `;
+    });
+  });
+}
+
+function deleteProduct(id){
+  db.collection("products").doc(id).delete();
+}
+
+loadProducts();
+</script></body>
+</html>
