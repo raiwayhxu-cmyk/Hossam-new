@@ -3,285 +3,441 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة التحكم — Hossam Samsung</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<title>About - Tomas Atef</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <style>
-:root{--accent:#00b7ff;--accent2:#00e5ff;--gold:#ffd700;--bg:#050505;--bg2:#0a0a0a;--card:#0e0e0e;--border:#1f1f1f;--text:#e8e8e8;--text2:#a0a0a0;}
-*{margin:0;padding:0;box-sizing:border-box;}
-body{font-family:'Cairo',sans-serif;background:var(--bg);color:var(--text);padding:20px;line-height:1.7;}
-.container{max-width:1000px;margin:auto;}
-h1{color:var(--accent);font-size:28px;margin-bottom:30px;display:flex;align-items:center;gap:12px;}
-h1 i{font-size:24px;}
-h2{font-size:20px;color:#fff;margin:30px 0 15px;display:flex;align-items:center;gap:10px;}
-h2 i{color:var(--accent);}
-
-.card{background:var(--card);border:1px solid var(--border);border-radius:20px;padding:25px;margin-bottom:25px;}
-input,textarea,select{
-  width:100%;padding:14px 16px;margin:8px 0;border-radius:12px;
-  border:1px solid #333;background:#111;color:#fff;font-family:'Cairo',sans-serif;font-size:15px;
-  transition:0.3s;
+:root{
+  --primary:#00b7ff;
+  --primary-glow:rgba(0,183,255,0.4);
+  --secondary:#7000ff;
+  --bg:#050505;
+  --card-bg:rgba(15,15,15,0.6);
+  --border:rgba(255,255,255,0.08);
+  --text:#e0e0e0;
+  --text-dim:#888;
 }
-input:focus,textarea:focus,select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 15px rgba(0,183,255,0.1);}
-textarea{min-height:80px;resize:vertical;}
-label{display:block;color:var(--text2);font-size:13px;margin:12px 0 4px;font-weight:600;}
-.hint{color:#666;font-size:12px;margin-top:4px;}
 
-.btn{
-  display:inline-flex;align-items:center;gap:10px;padding:14px 28px;border-radius:12px;
-  border:none;font-family:'Cairo',sans-serif;font-size:15px;font-weight:700;cursor:pointer;
-  transition:0.3s;margin-top:10px;
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
 }
-.btn-primary{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000;box-shadow:0 4px 20px rgba(0,183,255,0.25);}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,183,255,0.35);}
-.btn-danger{background:linear-gradient(135deg,#ff4757,#ff6b81);color:#fff;}
-.btn-danger:hover{transform:translateY(-2px);box-shadow:0 8px 25px rgba(255,71,87,0.3);}
-.btn-secondary{background:var(--bg2);color:var(--text);border:1px solid var(--border);}
-.btn-secondary:hover{border-color:var(--accent);color:var(--accent);}
 
-.product-item{
-  display:flex;align-items:center;gap:16px;background:var(--bg2);border:1px solid var(--border);
-  border-radius:16px;padding:16px;margin-bottom:12px;transition:0.3s;
+body{
+  background:var(--bg);
+  color:#fff;
+  font-family:'Cairo','Space Grotesk',sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
 }
-.product-item:hover{border-color:rgba(0,183,255,0.3);}
-.product-item img{width:70px;height:70px;object-fit:cover;border-radius:12px;background:#111;}
-.product-info{flex:1;}
-.product-info h4{font-size:18px;color:#fff;margin-bottom:4px;}
-.product-info p{color:var(--text2);font-size:14px;}
-.product-actions{display:flex;gap:8px;}
-.product-actions button{padding:10px 18px;font-size:13px;margin:0;}
 
-.color-row{
-  display:flex;gap:10px;align-items:flex-start;background:#0a0a0a;
-  border:1px solid #222;border-radius:12px;padding:15px;margin:10px 0;
+/* Animated Background */
+.bg-orb{
+  position:fixed;
+  border-radius:50%;
+  filter:blur(80px);
+  opacity:0.35;
+  z-index:0;
+  pointer-events:none;
 }
-.color-row input{flex:1;margin:0;}
-.color-row .btn{padding:10px 14px;font-size:12px;margin:0;}
-
-.alert{
-  padding:16px 20px;border-radius:12px;margin-bottom:20px;font-weight:600;display:none;
+.orb-1{
+  width:500px;height:500px;
+  background:var(--primary);
+  top:-10%;right:-10%;
+  animation:float 8s ease-in-out infinite;
 }
-.alert-success{background:rgba(37,211,102,0.1);border:1px solid rgba(37,211,102,0.3);color:#25d366;}
-.alert-error{background:rgba(255,71,87,0.1);border:1px solid rgba(255,71,87,0.3);color:#ff6b81;}
+.orb-2{
+  width:400px;height:400px;
+  background:var(--secondary);
+  bottom:-10%;left:-10%;
+  animation:float 10s ease-in-out infinite reverse;
+}
+.orb-3{
+  width:300px;height:300px;
+  background:#ff0055;
+  top:40%;left:30%;
+  opacity:0.15;
+  animation:float 12s ease-in-out infinite 2s;
+}
 
-.tabs{display:flex;gap:8px;margin-bottom:25px;border-bottom:1px solid var(--border);padding-bottom:15px;}
-.tab{padding:12px 24px;border-radius:12px;background:var(--bg2);border:1px solid var(--border);color:var(--text2);cursor:pointer;transition:0.3s;font-weight:600;}
-.tab.active{background:var(--accent);color:#000;border-color:var(--accent);}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
+@keyframes float{
+  0%,100%{transform:translate(0,0) scale(1);}
+  33%{transform:translate(30px,-30px) scale(1.1);}
+  66%{transform:translate(-20px,20px) scale(0.9);}
+}
 
-.empty-state{text-align:center;padding:60px 20px;color:var(--text2);}
-.empty-state i{font-size:48px;color:var(--text3);margin-bottom:16px;}
+/* Noise Texture Overlay */
+.noise{
+  position:fixed;
+  inset:0;
+  z-index:1;
+  opacity:0.03;
+  pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
 
-@media(max-width:768px){
-  .color-row{flex-direction:column;}
-  .product-item{flex-direction:column;text-align:center;}
-  .product-actions{width:100%;justify-content:center;}
+/* Container */
+.container{
+  position:relative;
+  z-index:2;
+  max-width:1000px;
+  margin:auto;
+  padding:80px 24px;
+  text-align:center;
+}
+
+/* Badge */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 20px;
+  background:rgba(0,183,255,0.1);
+  border:1px solid rgba(0,183,255,0.3);
+  border-radius:50px;
+  font-size:14px;
+  font-weight:600;
+  color:var(--primary);
+  margin-bottom:24px;
+  backdrop-filter:blur(10px);
+}
+.badge-dot{
+  width:8px;height:8px;
+  background:var(--primary);
+  border-radius:50%;
+  box-shadow:0 0 10px var(--primary);
+  animation:pulse 2s infinite;
+}
+@keyframes pulse{
+  0%,100%{opacity:1;transform:scale(1);}
+  50%{opacity:0.5;transform:scale(0.8);}
+}
+
+/* Title */
+h1{
+  font-size:clamp(36px,6vw,64px);
+  font-weight:900;
+  line-height:1.1;
+  margin-bottom:12px;
+  background:linear-gradient(135deg,#fff 0%,var(--primary) 50%,var(--secondary) 100%);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+h1 span{
+  display:block;
+  font-size:0.5em;
+  font-weight:400;
+  color:var(--text-dim);
+  -webkit-text-fill-color:var(--text-dim);
+  margin-top:8px;
+}
+
+.subtitle{
+  color:var(--text-dim);
+  font-size:18px;
+  max-width:500px;
+  margin:0 auto 50px;
+  line-height:1.7;
+}
+
+/* Profile Section - Enhanced */
+.profile-wrap{
+  position:relative;
+  display:inline-block;
+  margin-bottom:40px;
+}
+
+/* Outer Glow Ring */
+.profile-glow{
+  position:absolute;
+  inset:-30px;
+  border-radius:50%;
+  background:conic-gradient(from 0deg, var(--primary), var(--secondary), #ff0055, var(--primary));
+  opacity:0.3;
+  filter:blur(15px);
+  animation:spin-glow 8s linear infinite;
+}
+@keyframes spin-glow{
+  to{transform:rotate(360deg);}
+}
+
+/* Inner Rotating Ring */
+.profile-ring{
+  position:absolute;
+  inset:-12px;
+  border-radius:50%;
+  border:2px solid transparent;
+  border-top-color:var(--primary);
+  border-right-color:var(--secondary);
+  animation:spin 3s linear infinite;
+}
+.profile-ring-2{
+  inset:-20px;
+  border-top-color:var(--secondary);
+  border-left-color:var(--primary);
+  animation:spin 5s linear infinite reverse;
+  opacity:0.6;
+}
+@keyframes spin{
+  to{transform:rotate(360deg);}
+}
+
+.profile{
+  position:relative;
+  z-index:2;
+}
+
+.profile img{
+  width:200px;height:200px;
+  border-radius:50%;
+  object-fit:cover;
+  border:4px solid rgba(0,183,255,0.4);
+  box-shadow:
+    0 0 40px rgba(0,183,255,0.4),
+    0 0 80px rgba(0,183,255,0.15),
+    0 0 120px rgba(0,183,255,0.05),
+    inset 0 0 40px rgba(0,0,0,0.6);
+  transition:all 0.5s cubic-bezier(0.4,0,0.2,1);
+}
+.profile img:hover{
+  transform:scale(1.08);
+  box-shadow:
+    0 0 60px rgba(0,183,255,0.6),
+    0 0 100px rgba(0,183,255,0.25),
+    0 0 150px rgba(0,183,255,0.1),
+    inset 0 0 40px rgba(0,0,0,0.6);
+  border-color:var(--primary);
+}
+
+/* Main Card - Glassmorphism */
+.card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:40px;
+  backdrop-filter:blur(20px);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  border-radius:24px;
+  padding:1px;
+  background:linear-gradient(135deg,rgba(0,183,255,0.3),transparent 40%,transparent 60%,rgba(112,0,255,0.3));
+  -webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);
+  -webkit-mask-composite:xor;
+  mask-composite:exclude;
+  pointer-events:none;
+}
+
+.intro-text{
+  font-size:22px;
+  line-height:2.2;
+  color:var(--text);
+  margin-bottom:30px;
+}
+.intro-text b{
+  color:var(--primary);
+  font-weight:800;
+}
+
+/* Social Grid */
+.social{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;
+  margin-top:35px;
+}
+
+.social a{
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  padding:18px;
+  border-radius:16px;
+  text-decoration:none;
+  font-weight:700;
+  font-size:15px;
+  color:#fff;
+  background:rgba(255,255,255,0.03);
+  border:1px solid rgba(255,255,255,0.06);
+  overflow:hidden;
+  transition:all 0.4s cubic-bezier(0.4,0,0.2,1);
+}
+.social a::before{
+  content:'';
+  position:absolute;
+  inset:0;
+  opacity:0;
+  transition:opacity 0.4s;
+}
+.social a:hover{
+  transform:translateY(-5px);
+  border-color:transparent;
+  box-shadow:0 10px 40px rgba(0,0,0,0.5);
+}
+.social a:hover::before{
+  opacity:0.1;
+}
+
+/* Brand Colors with Glow */
+.social a.fb{
+  --brand:#1877F2;
+  --brand-glow:rgba(24,119,242,0.4);
+}
+.social a.ig{
+  --brand:#E1306C;
+  --brand-glow:rgba(225,48,108,0.4);
+}
+.social a.tg{
+  --brand:#2AABEE;
+  --brand-glow:rgba(42,171,238,0.4);
+}
+.social a.wa{
+  --brand:#25D366;
+  --brand-glow:rgba(37,211,102,0.4);
+}
+
+.social a.fb::before{background:var(--brand);}
+.social a.ig::before{background:var(--brand);}
+.social a.tg::before{background:var(--brand);}
+.social a.wa::before{background:var(--brand);}
+
+.social a:hover{
+  border-color:var(--brand);
+  box-shadow:0 0 20px var(--brand-glow),0 10px 30px rgba(0,0,0,0.3);
+}
+.social a .icon{
+  font-size:20px;
+  transition:transform 0.3s;
+}
+.social a:hover .icon{
+  transform:scale(1.2);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--primary);border-radius:4px;}
+
+/* Responsive */
+@media(max-width:640px){
+  .container{padding:50px 16px;}
+  .card{padding:24px;}
+  .profile img{width:160px;height:160px;}
+}
+
+/* Entrance Animations */
+.reveal{
+  opacity:0;
+  transform:translateY(30px);
 }
 </style>
 </head>
+
 <body>
+
+<!-- Background Effects -->
+<div class="bg-orb orb-1"></div>
+<div class="bg-orb orb-2"></div>
+<div class="bg-orb orb-3"></div>
+<div class="noise"></div>
+
 <div class="container">
-  <h1><i class="fas fa-cog"></i> لوحة تحكم Hossam Samsung</h1>
-  
-  <div class="tabs">
-    <div class="tab active" onclick="switchTab('add',this)"><i class="fas fa-plus"></i> إضافة منتج</div>
-    <div class="tab" onclick="switchTab('list',this)"><i class="fas fa-list"></i> المنتجات</div>
+
+  <div class="badge reveal">
+    <span class="badge-dot"></span>
+    متاح للعمل الحر
   </div>
 
-  <div id="alertBox" class="alert"></div>
+  <h1 class="reveal">
+    Tomas Atef
+    <span>مطور & مصمم واجهات</span>
+  </h1>
 
-  <!-- ADD PRODUCT -->
-  <div id="tab-add" class="tab-content active">
-    <div class="card">
-      <h2><i class="fas fa-plus-circle"></i> منتج جديد</h2>
-      
-      <label>اسم المنتج</label>
-      <input id="name" placeholder="مثال: Galaxy S24 Ultra">
-      
-      <label>السعر الأساسي (لو مفيش ألوان)</label>
-      <input id="price" placeholder="مثال: 48,500">
-      
-      <label>رابط الصورة الأساسية</label>
-      <input id="image" placeholder="https://...">
-      
-      <label>المواصفات الأساسية</label>
-      <textarea id="spec" placeholder="256GB / 12GB RAM • Dual SIM • Box + Cable"></textarea>
-      
-      <hr style="border-color:#222;margin:25px 0;">
-      
-      <h2><i class="fas fa-palette"></i> الألوان (اختياري)</h2>
-      <p class="hint">لو المنتج له أكتر من لون وسعر مختلف، ضيفهم هنا. لو منتج واحد بس، سيبهم فاضيين.</p>
-      
-      <div id="colorsContainer"></div>
-      <button class="btn btn-secondary" onclick="addColorRow()"><i class="fas fa-plus"></i> إضافة لون</button>
-      
-      <hr style="border-color:#222;margin:25px 0;">
-      
-      <button class="btn btn-primary" onclick="addProduct()"><i class="fas fa-save"></i> حفظ المنتج</button>
+  <p class="subtitle reveal">
+    أبني تجارب رقمية استثنائية بتصاميم عصرية وتقنيات متطورة
+  </p>
+
+  <div class="profile-wrap reveal">
+    <div class="profile-glow"></div>
+    <div class="profile-ring"></div>
+    <div class="profile-ring-2"></div>
+    <div class="profile">
+      <img src="https://i.ibb.co/XkdMY5vn/IMG-20260510-193806-035.jpg" alt="Tomas Atef">
     </div>
   </div>
 
-  <!-- LIST PRODUCTS -->
-  <div id="tab-list" class="tab-content">
-    <div class="card">
-      <h2><i class="fas fa-boxes"></i> المنتجات المضافة</h2>
-      <div id="productsList">
-        <div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>جاري التحميل...</p></div>
-      </div>
+    <div class="social">
+      <a class="fb" href="https://www.facebook.com/share/17jSXnuRuy/" target="_blank">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </span>
+        <span>Facebook</span>
+      </a>
+      <a class="ig" href="https://www.instagram.com/tomasatef_u?igsh=MWFjemQwMmxpZG8yeA==" target="_blank">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </span>
+        <span>Instagram</span>
+      </a>
+      <a class="tg" href="https://t.me/root_Tom" target="_blank">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M11.944 0A12 12 0 000 12a12 12 0 0012 12 12 12 0 0012-12A12 12 0 0011.944 0zm5.508 7.56c.252.008.492.072.696.18.42.228.66.636.66 1.14 0 .072-.012.156-.024.24-.228 1.248-.864 3.756-1.92 7.548-.12.456-.36.684-.72.684-.192 0-.36-.072-.552-.24l-2.076-1.788-1.056.852c-.12.108-.24.156-.36.156-.096 0-.192-.036-.276-.108l.024-.276 1.008-3.936.012-.024c.012-.024.024-.048.024-.072 0-.06-.036-.108-.108-.108-.06 0-.132.024-.204.084l-2.616 2.376-1.464-.48c-.336-.108-.348-.348-.228-.516l5.832-5.352c.252-.228.504-.336.756-.324z"/></svg>
+        </span>
+        <span>Telegram</span>
+      </a>
+      <a class="wa" href="https://wa.me/201271170094" target="_blank">
+        <span class="icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </span>
+        <span>WhatsApp</span>
+      </a>
     </div>
   </div>
+
 </div>
 
-<!-- ===== FIREBASE COMPAT MODE ===== -->
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
 <script>
-// ✅ Firebase Config مُصلح — نفس المشروع: hossam-72f79
-const firebaseConfig = {
-  apiKey: "AIzaSyC6BeFZCFK6gYsxG0zO4UJzPeZZbhAllU",
-  authDomain: "hossam-72f79.firebaseapp.com",
-  projectId: "hossam-72f79",
-  storageBucket: "hossam-72f79.appspot.com",  // ✅ صلّحتها
-  messagingSenderId: "756116202818",
-  appId: "1:756116202818:web:8883cf3d6ea170d02dd4db",
-  measurementId: "G-S3YTS658KX"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-// ===== TABS =====
-function switchTab(tab, el){
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('tab-'+tab).classList.add('active');
-}
-
-// ===== ALERT =====
-function showAlert(msg, type){
-  const box = document.getElementById('alertBox');
-  box.className = 'alert alert-'+type;
-  box.innerHTML = '<i class="fas fa-'+(type==='success'?'check-circle':'exclamation-circle')+'"></i> '+msg;
-  box.style.display = 'block';
-  setTimeout(()=>{box.style.display='none';},4000);
-}
-
-// ===== COLOR ROWS =====
-function addColorRow(){
-  const container = document.getElementById('colorsContainer');
-  const id = Date.now();
-  container.innerHTML += `
-    <div class="color-row" id="color-${id}">
-      <input placeholder="اسم اللون" class="c-name">
-      <input placeholder="السعر" class="c-price">
-      <input placeholder="رابط الصورة" class="c-image">
-      <input placeholder="المواصفات" class="c-spec">
-      <input placeholder="كود اللون (#hex)" class="c-hex" value="#666">
-      <button class="btn btn-danger" onclick="document.getElementById('color-${id}').remove()"><i class="fas fa-trash"></i></button>
-    </div>
-  `;
-}
-
-// ===== ADD PRODUCT =====
-function addProduct(){
-  const name = document.getElementById('name').value.trim();
-  const price = document.getElementById('price').value.trim();
-  const image = document.getElementById('image').value.trim();
-  const spec = document.getElementById('spec').value.trim();
-  
-  if(!name){showAlert('اكتب اسم المنتج', 'error'); return;}
-  
-  const colorRows = document.querySelectorAll('.color-row');
-  const colors = [];
-  colorRows.forEach(row => {
-    const inputs = row.querySelectorAll('input');
-    if(inputs[0].value.trim()){
-      colors.push({
-        colorName: inputs[0].value.trim(),
-        price: inputs[1].value.trim(),
-        image: inputs[2].value.trim(),
-        spec: inputs[3].value.trim(),
-        colorHex: inputs[4].value.trim() || '#666'
-      });
-    }
+// GSAP Animations
+gsap.utils.toArray('.reveal').forEach((el,i)=>{
+  gsap.to(el,{
+    opacity:1,
+    y:0,
+    duration:1,
+    delay:i*0.15,
+    ease:"power3.out"
   });
-  
-  const data = {
-    name: name,
-    price: price,
-    image: image,
-    spec: spec,
-    colors: colors.length > 0 ? colors : null,
-    createdAt: firebase.firestore.FieldValue.serverTimestamp()  // ✅ server timestamp أحسن
-  };
-  
-  if(!data.price) delete data.price;
-  if(!data.image) delete data.image;
-  if(!data.spec) delete data.spec;
-  if(!data.colors) delete data.colors;
-  
-  db.collection("products").add(data)
-    .then(() => {
-      showAlert('تمت إضافة المنتج بنجاح!', 'success');
-      document.getElementById('name').value = '';
-      document.getElementById('price').value = '';
-      document.getElementById('image').value = '';
-      document.getElementById('spec').value = '';
-      document.getElementById('colorsContainer').innerHTML = '';
-    })
-    .catch(err => {
-      console.error("Add Error:", err);
-      showAlert('خطأ: '+err.message, 'error');
-    });
-}
+});
 
-// ===== LOAD & DELETE =====
-function loadProducts(){
-  const list = document.getElementById('productsList');
-  
-  db.collection("products").orderBy('createdAt','desc').onSnapshot(snap => {
-    if(snap.empty){
-      list.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><p>لا توجد منتجات</p></div>`;
-      return;
-    }
-    
-    list.innerHTML = '';
-    snap.forEach(doc => {
-      const p = doc.data();
-      list.innerHTML += `
-        <div class="product-item">
-          <img src="${p.image || p.colors?.[0]?.image || 'https://via.placeholder.com/70'}" alt="${p.name}">
-          <div class="product-info">
-            <h4>${p.name}</h4>
-            <p>${p.price || p.colors?.[0]?.price || '0'} جنيه • ${p.colors?.length || 0} ألوان</p>
-          </div>
-          <div class="product-actions">
-            <button class="btn btn-danger" onclick="deleteProduct('${doc.id}')"><i class="fas fa-trash"></i> حذف</button>
-          </div>
-        </div>
-      `;
-    });
-  }, err => {
-    console.error("Load Error:", err);
-    list.innerHTML = `<div class="empty-state" style="color:#ff6b81;"><i class="fas fa-exclamation-triangle"></i><p>خطأ في الاتصال بـ Firebase</p></div>`;
+// Profile hover tilt effect
+const profile=document.querySelector('.profile-wrap');
+profile.addEventListener('mousemove',(e)=>{
+  const rect=profile.getBoundingClientRect();
+  const x=e.clientX-rect.left-rect.width/2;
+  const y=e.clientY-rect.top-rect.height/2;
+  gsap.to('.profile img',{
+    rotationY:x/10,
+    rotationX:-y/10,
+    duration:0.5,
+    ease:"power2.out"
   });
-}
-
-function deleteProduct(id){
-  if(confirm('هل تريد حذف هذا المنتج؟')){
-    db.collection("products").doc(id).delete()
-      .then(() => showAlert('تم الحذف', 'success'))
-      .catch(err => {
-        console.error("Delete Error:", err);
-        showAlert('خطأ: '+err.message, 'error');
-      });
-  }
-}
-
-loadProducts();
+});
+profile.addEventListener('mouseleave',()=>{
+  gsap.to('.profile img',{
+    rotationY:0,
+    rotationX:0,
+    duration:0.5
+  });
+});
 </script>
+
 </body>
 </html>
